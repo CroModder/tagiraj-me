@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavParams, ViewController, ModalController, AlertController } from 'ionic-angular';
 import { SingleArticle } from '../articles/single-article';
 import { DatabaseService } from "../../providers/database-service";
-import { NfcService } from "../../providers/nfc-service";
 
 @Component({
   selector: 'tags-search',

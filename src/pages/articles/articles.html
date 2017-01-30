@@ -7,4 +7,16 @@
 </ion-header>
 
 <ion-content>
+  <ion-list>
+    <ion-item *ngFor="let article of articles" (click)="openModalSingle(article.id)">
+      <ion-avatar item-left>
+      <img src="{{article.thumbnail}}">
+      </ion-avatar>
+      <h2>{{article.name}}</h2>
+      <p>{{article.description}}</p>
+    </ion-item>
+  </ion-list>
+  <ion-fab right bottom>
+  <button ion-fab color="primary" (click)="openModalNew()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
 </ion-content>

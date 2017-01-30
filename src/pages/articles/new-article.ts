@@ -8,7 +8,7 @@ import { DatabaseService } from "../../providers/database-service";
   templateUrl: 'new-article.html'
 })
 
-export class NewArticle {
+export class NewArticle { 
   public name: string;
   public thumbnail: string;
   public description: string;
@@ -38,7 +38,12 @@ export class NewArticle {
   }
 
   public selectFromGallery() {
-    let options = {sourceType: Camera.PictureSourceType.PHOTOLIBRARY };
+    let options = {
+      sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+      destinationType: Camera.DestinationType.FILE_URI,    
+      encodingType: Camera.EncodingType.JPEG,      
+      correctOrientation: true
+    };
     Camera.getPicture(options).then((imageData) => {
         this.thumbnail = imageData;
     }, (err) => {

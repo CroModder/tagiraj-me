@@ -22,8 +22,12 @@ export class SingleArticle {
 
   constructor(public modalCtrl: ModalController, public viewCtrl: ViewController,  public params: NavParams, private nfc: NfcService, private database: DatabaseService, public alertCtrl: AlertController ) {
     this.id = this.params.get("id");
+    this.init();
+  }
+
+  public init(){
     this.readArticle(this.id);
-    database.articleTags(this.id).then((result) => {
+    this.database.articleTags(this.id).then((result) => {
       this.tags = <Array<Object>> result;
     }, (error) => {
         console.log("ERROR: ", error);
@@ -33,6 +37,9 @@ export class SingleArticle {
   public openModalEdit() {
     let modal = this.modalCtrl.create(EditArticle, {article: this.article, tags: this.tags});
     modal.present();
+    modal.onDidDismiss(data => {
+     this.init();
+    });
   }
 
   public readArticle(id: number) {
@@ -65,11 +72,14 @@ export class SingleArticle {
     confirm.present();
   }
 
-  public deleteArticle(id: number) {
+  public deleteArticle(id: number) {  
     this.database.deleteArticle(id).then((result) => {
+      let alert = this.alertCtrl.create({title: "from deleteArticle success", message: JSON.stringify(result), buttons: [{text: 'Zatvori'}]});
+      alert.present(); 
       this.dismiss();
     }, (error) => {
-        console.log("ERROR: ", error);
+        let alert = this.alertCtrl.create({title: "from deleteArticle error", message: JSON.stringify(error), buttons: [{text: 'Zatvori'}]});
+        alert.present(); 
     });
   }
 

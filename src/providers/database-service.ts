@@ -19,12 +19,11 @@ public constructor( platform: Platform) {
     platform.ready().then(() => {
         if(!this.isOpen) {
             this.storage = new SQLite();
-            this.storage.openDatabase({name: "test.db", location: "default"}).then(() => {
-            this.storage.executeSql("PRAGMA foreign_keys = ON", []);
-            this.storage.executeSql("CREATE TABLE IF NOT EXISTS tags (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT, UNIQUE (name) ON CONFLICT ABORT)", []);
-            this.storage.executeSql("CREATE TABLE IF NOT EXISTS articles (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT, thumbnail TEXT, description TEXT, code TEXT)", []);
-            this.storage.executeSql("CREATE TABLE IF NOT EXISTS items (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT, thumbnail TEXT, description TEXT)", []);
-            this.storage.executeSql("CREATE TABLE IF NOT EXISTS tags_map (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, article_id INTEGER, tag_id INTEGER, FOREIGN KEY (article_id) REFERENCES articles (id), FOREIGN KEY (tag_id) REFERENCES tags (id))", []);
+            this.storage.openDatabase({name: "constraint.db", location: "default"}).then(() => {
+            this.storage.executeSql("PRAGMA foreign_keys = ON", []); // https://www.sqlite.org/foreignkeys.html#fk_enable
+            this.storage.executeSql("CREATE TABLE IF NOT EXISTS tags (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT NOT NULL UNIQUE)", []);
+            this.storage.executeSql("CREATE TABLE IF NOT EXISTS articles (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT NOT NULL UNIQUE, thumbnail TEXT, description TEXT, code TEXT)", []);
+            this.storage.executeSql("CREATE TABLE IF NOT EXISTS tags_map (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, article_id INTEGER, tag_id INTEGER, FOREIGN KEY (article_id) REFERENCES articles (id), FOREIGN KEY (tag_id) REFERENCES tags (id) ON DELETE RESTRICT)", []);
             this.isOpen = true;
             });
         }
@@ -190,15 +189,18 @@ public updateArticle(name: string, thumbnail: string, description: string, code:
 }
 
 public deleteArticle(id: number) {
-    return new Promise((resolve, reject) => {
-        this.storage.executeSql("DELETE FROM articles WHERE id = ?", [id]).then((data) => {
-            this.deleteTagsMap(id);
-            resolve(data);
-        }, (error) => {
-            reject(error);
-        });
+    return this.deleteTagsMap(id)
+    .then(() => this.deleteArticlebyId(id))
+}
+
+public deleteArticlebyId(id: number) {
+    this.storage.executeSql("DELETE FROM articles WHERE id = ?", [id]).then((result) => {   
+        return result;
+    }, (error) => {
+        return error;
     });
 }
+
 
 public createTag(name: string) {
     return new Promise((resolve, reject) => {
@@ -252,9 +254,9 @@ public deleteTag(id: number) {
 public deleteTagsMap(id: number) {
     return new Promise((resolve, reject) => {
         this.storage.executeSql("DELETE FROM tags_map WHERE article_id = ?", [id]).then((data) => {
-           console.log(data);
+           resolve(data);
         }, (error) => {
-            console.log(error);
+            reject(error);
         });
     });
 }

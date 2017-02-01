@@ -72,14 +72,12 @@ export class SingleArticle {
     confirm.present();
   }
 
-  public deleteArticle(id: number) {  
+  public deleteArticle(id: number) {
     this.database.deleteArticle(id).then((result) => {
-      let alert = this.alertCtrl.create({title: "from deleteArticle success", message: JSON.stringify(result), buttons: [{text: 'Zatvori'}]});
-      alert.present(); 
+      console.log(result)
       this.dismiss();
     }, (error) => {
-        let alert = this.alertCtrl.create({title: "from deleteArticle error", message: JSON.stringify(error), buttons: [{text: 'Zatvori'}]});
-        alert.present(); 
+      console.log(error);
     });
   }
 

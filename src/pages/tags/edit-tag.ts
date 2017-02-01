@@ -48,7 +48,16 @@ export class EditTag {
     this.database.deleteTag(this.id).then((result) => {
         this.dismiss();
     }, (error) => {
-        console.log("ERROR: ", error);
+        let confirm = this.alertCtrl.create({
+          title: "Greška prilikom brisanja!",
+          message: "Nije moguće obrisati oznaku koja je pridružena nekom artiklu.",
+          buttons: [
+            {
+              text: 'Zatvori'
+            }
+          ]
+        });
+        confirm.present(); 
     });
   }
 

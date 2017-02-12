@@ -19,7 +19,7 @@ public constructor( platform: Platform) {
     platform.ready().then(() => {
         if(!this.isOpen) {
             this.storage = new SQLite();
-            this.storage.openDatabase({name: "constraint.db", location: "default"}).then(() => {
+            this.storage.openDatabase({name: "tagirajme.db", location: "default"}).then(() => {
             this.storage.executeSql("PRAGMA foreign_keys = ON", []); // https://www.sqlite.org/foreignkeys.html#fk_enable
             this.storage.executeSql("CREATE TABLE IF NOT EXISTS tags (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT NOT NULL UNIQUE)", []);
             this.storage.executeSql("CREATE TABLE IF NOT EXISTS articles (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT NOT NULL UNIQUE, thumbnail TEXT, description TEXT, code TEXT)", []);

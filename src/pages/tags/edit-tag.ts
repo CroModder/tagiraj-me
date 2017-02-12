@@ -37,11 +37,16 @@ export class EditTag {
   }
 
   public updateTag() {
-    this.database.updateTag(this.id, this.name).then((result) => {
-        this.dismiss();
-    }, (error) => {
-        console.log("ERROR: ", error);
-    });
+    if (this.name == "") {
+      let msg = this.alertCtrl.create({title: 'Ime oznake ne smije biti prazno!'});
+      msg.present();
+    } else {
+        this.database.updateTag(this.id, this.name).then((result) => {
+            this.dismiss();
+        }, (error) => {
+            console.log("ERROR: ", error);
+        });
+    }
   }
 
   public deleteTag() {

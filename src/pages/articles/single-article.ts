@@ -11,7 +11,7 @@ import { NfcService } from "../../providers/nfc-service";
 })
 
 export class SingleArticle {
-  public tags: any;
+  public tags: Array<Object> = [];
   public article: any;
   public id: number;
   public name: string;

@@ -19,12 +19,14 @@
  <img src="{{thumbnail}}"/>
  <p>{{description}}</p>
  <hr>
-<h3>Oznake:</h3>
+<h3 *ngIf="tags.length > 0">Oznake:</h3>
 <ion-chip *ngFor="let tag of tags">
   <ion-label>{{tag.name}}</ion-label>
 </ion-chip>
-<br><br><hr>
-<h3>Kod:</h3>
-<p>{{code}}</p>
-<button ion-button block (click)="writeNFC()">Write NFC</button>
+<br><br>
+<hr *ngIf="code">
+<ion-item>
+  <b>Šifra:</b> {{code}}
+  <ion-icon name="md-wifi" item-right></ion-icon>
+</ion-item>
 </ion-content>

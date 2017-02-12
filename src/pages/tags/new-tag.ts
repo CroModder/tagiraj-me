@@ -16,13 +16,14 @@ export class NewTag {
 
   public createTag() {
     if (this.name == "") {
-      let msg = this.alertCtrl.create({title: 'Ime oznake ne smije biti prazno!'});
+      let msg = this.alertCtrl.create({title: 'Ime oznake ne smije biti prazno!', buttons: [{text: 'Zatvori'}]});
       msg.present();
     } else {
         this.database.createTag(this.name).then((result) => {
             this.dismiss();
         }, (error) => {
-            console.log("ERROR: ", error);
+            let msg = this.alertCtrl.create({title: 'Ime oznake već postoji!', buttons: [{text: 'Zatvori'}]});
+            msg.present();
         });
     }
   }

@@ -76,7 +76,6 @@ export class HomePage {
           text: 'Dodaj',
           handler: () => {
             let modal = this.modalCtrl.create(NewArticle, {code: this.code});
-            console.log(this.code);
             modal.present();
           }
         },

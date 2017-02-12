@@ -74,7 +74,6 @@ export class SingleArticle {
 
   public deleteArticle(id: number) {
     this.database.deleteArticle(id).then((result) => {
-      console.log(result)
       this.dismiss();
     }, (error) => {
       console.log(error);

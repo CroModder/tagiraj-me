@@ -40,9 +40,7 @@ export class TagsPage {
 
   public readAllTags() {
      this.database.readAllTags().then((result) => {
-          this.tags = <Array<Object>> result;
-          console.log(this.tags);
-          
+          this.tags = <Array<Object>> result;         
       }, (error) => {
           console.log("ERROR: ", error);
       });

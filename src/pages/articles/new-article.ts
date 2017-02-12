@@ -54,15 +54,14 @@ export class NewArticle {
 
   public createArticle() {
     if (this.name == "") {
-      let msg = this.alertCtrl.create({title: 'Ime artikla ne smije biti prazno!'});
+      let msg = this.alertCtrl.create({title: 'Ime artikla ne smije biti prazno!', buttons: [{text: 'Zatvori'}]});
       msg.present();
     } else {
         this.database.createArticle(this.name, this.thumbnail, this.description, this.code, this.tagsSelected).then((result) => {
-          console.log(result);
-          console.log(JSON.stringify(result));
             this.dismiss();
         }, (error) => {
-            console.log("ERROR: ", error);
+            let msg = this.alertCtrl.create({title: 'Ime artikla već postoji!', buttons: [{text: 'Zatvori'}]});
+            msg.present();
         });
     }
   }

@@ -23,7 +23,6 @@ export class EditArticle {
     let tagsObjectArray = params.get("tags");
     this.tagsNames = tagsObjectArray.map (tag => tag.name);
     this.tagsSelected = tagsObjectArray.map(tag => tag.id);
-    console.log(this.tagsSelected);
     
     this.id = article.id;
     this.name = article.name;
@@ -75,13 +74,14 @@ export class EditArticle {
 
   public editArticle() {
     if (this.name == "") {
-      let msg = this.alertCtrl.create({title: 'Ime artikla ne smije biti prazno!'});
+      let msg = this.alertCtrl.create({title: 'Ime artikla ne smije biti prazno!', buttons: [{text: 'Zatvori'}]});
       msg.present();
     } else {    
         this.database.updateArticle(this.name, this.thumbnail, this.description, this.code, this.id, this.tagsSelected).then((result) => {
             this.dismiss();
         }, (error) => {
-            console.log("ERROR: ", error);
+            let msg = this.alertCtrl.create({title: 'Ime artikla već postoji!', buttons: [{text: 'Zatvori'}]});
+            msg.present();
         });
     }
   }

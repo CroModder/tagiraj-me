@@ -108,6 +108,31 @@ export class HomePage {
     alert.present();
   }
 
+  public keywordSearch() {
+    let alert = this.alertCtrl.create({
+      inputs: [
+        {
+          name: 'keywords',
+          placeholder: 'Unesite ključne riječi'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Potvrdi',
+          handler: data => {
+                this.database.readArticleIdByKeywords(data.keywords.split(" ")).then((result) => {
+                  console.log(result);
+                }, (error) => {
+                  console.log(error);
+                });
+          }
+        },
+        {text: 'Odustani'}
+      ]
+    });
+    alert.present();
+  }
+
   public filterByTags() {
     let modal = this.modalCtrl.create(TagsSearchModal);
     modal.present();

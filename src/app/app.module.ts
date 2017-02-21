@@ -4,6 +4,7 @@ import { MyApp } from './app.component';
 import { TabsPage } from '../pages/tabs/tabs';
 import { HomePage } from '../pages/home/home';
 import { TagsSearchModal } from '../pages/home/tags-search';
+import { KeywordsSearchModal } from '../pages/home/keywords-search';
 import { ArticlesPage } from '../pages/articles/articles';
 import { SingleArticle } from '../pages/articles/single-article';
 import { NewArticle } from '../pages/articles/new-article';
@@ -22,6 +23,7 @@ import { NfcService } from '../providers/nfc-service';
     TabsPage,
     HomePage,
     TagsSearchModal,
+    KeywordsSearchModal,
     ArticlesPage,
     SingleArticle,
     EditArticle,
@@ -41,6 +43,7 @@ import { NfcService } from '../providers/nfc-service';
     TabsPage,
     HomePage,
     TagsSearchModal,
+    KeywordsSearchModal,
     ArticlesPage,
     SingleArticle,
     EditArticle,

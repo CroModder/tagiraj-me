@@ -134,13 +134,13 @@ public readArticleIdByTags(tags) {
 
 public readArticleIdByKeywords(keywords) {
     return new Promise((resolve, reject) => {
-        console.log("Total: ", keywords);
-        let query = "SELECT DISTINCT id FROM articles WHERE " + keywords.map((keyword) => `name LIKE '%?%'`).join(" OR ");
-        this.storage.executeSql(query, [...keywords]).then((data) => {
+        let query = "SELECT DISTINCT id FROM articles WHERE " + keywords.map(() => 'name LIKE ?').join(' OR ');
+        let params = keywords.map((keyword) => `%${keyword}%`);
+        this.storage.executeSql(query, [...params]).then((data) => {
             let article = [];
             if(data.rows.length > 0) {
                 for(let i = 0; i < data.rows.length; i++) {
-                    article.push(data.rows.item(i).article_id);
+                    article.push(data.rows.item(i).id);
                 }
             } else {
                 reject("Nije pronađen nijedan artikl");

@@ -4,6 +4,7 @@ import { BarcodeScanner } from 'ionic-native';
 import { SingleArticle } from '../articles/single-article';
 import { NewArticle } from '../articles/new-article';
 import { TagsSearchModal } from '../home/tags-search';
+import { KeywordsSearchModal } from '../home/keywords-search'
 import { DatabaseService } from "../../providers/database-service";
 import { NfcService } from "../../providers/nfc-service";
 
@@ -109,28 +110,8 @@ export class HomePage {
   }
 
   public keywordSearch() {
-    let alert = this.alertCtrl.create({
-      inputs: [
-        {
-          name: 'keywords',
-          placeholder: 'Unesite ključne riječi'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Potvrdi',
-          handler: data => {
-                this.database.readArticleIdByKeywords(data.keywords.split(" ")).then((result) => {
-                  console.log(result);
-                }, (error) => {
-                  console.log(error);
-                });
-          }
-        },
-        {text: 'Odustani'}
-      ]
-    });
-    alert.present();
+    let modal = this.modalCtrl.create(KeywordsSearchModal);
+    modal.present();
   }
 
   public filterByTags() {

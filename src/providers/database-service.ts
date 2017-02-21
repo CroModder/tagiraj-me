@@ -132,6 +132,26 @@ public readArticleIdByTags(tags) {
     });
 }
 
+public readArticleIdByKeywords(keywords) {
+    return new Promise((resolve, reject) => {
+        let query = "SELECT DISTINCT id FROM articles WHERE " + keywords.map(() => 'name LIKE ?').join(' OR ');
+        let params = keywords.map((keyword) => `%${keyword}%`);
+        this.storage.executeSql(query, [...params]).then((data) => {
+            let article = [];
+            if(data.rows.length > 0) {
+                for(let i = 0; i < data.rows.length; i++) {
+                    article.push(data.rows.item(i).id);
+                }
+            } else {
+                reject("Nije pronađen nijedan artikl");
+            }
+            resolve(article);
+        }, (error) => {
+            reject(error);
+        });
+    });
+}
+
 public readArticlebyId(ids) {
     return new Promise((resolve, reject) => {
         let query = 'SELECT * FROM articles WHERE id IN (' + ids.map(() => '?').join(',') + ')';

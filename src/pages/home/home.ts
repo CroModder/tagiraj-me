@@ -4,6 +4,7 @@ import { BarcodeScanner } from 'ionic-native';
 import { SingleArticle } from '../articles/single-article';
 import { NewArticle } from '../articles/new-article';
 import { TagsSearchModal } from '../home/tags-search';
+import { KeywordsSearchModal } from '../home/keywords-search'
 import { DatabaseService } from "../../providers/database-service";
 import { NfcService } from "../../providers/nfc-service";
 
@@ -106,6 +107,11 @@ export class HomePage {
       ]
     });
     alert.present();
+  }
+
+  public keywordSearch() {
+    let modal = this.modalCtrl.create(KeywordsSearchModal);
+    modal.present();
   }
 
   public filterByTags() {

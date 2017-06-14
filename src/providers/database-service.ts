@@ -22,7 +22,7 @@ public constructor( platform: Platform) {
             this.storage.openDatabase({name: "tagirajme.db", location: "default"}).then(() => {
             this.storage.executeSql("PRAGMA foreign_keys = ON", []); // https://www.sqlite.org/foreignkeys.html#fk_enable
             this.storage.executeSql("CREATE TABLE IF NOT EXISTS tags (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT NOT NULL UNIQUE)", []);
-            this.storage.executeSql("CREATE TABLE IF NOT EXISTS articles (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT NOT NULL UNIQUE, thumbnail TEXT, description TEXT, code TEXT)", []);
+            this.storage.executeSql("CREATE TABLE IF NOT EXISTS articles (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT NOT NULL UNIQUE, thumbnail TEXT, description TEXT, code TEXT UNIQUE)", []);
             this.storage.executeSql("CREATE TABLE IF NOT EXISTS tags_map (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, article_id INTEGER, tag_id INTEGER, FOREIGN KEY (article_id) REFERENCES articles (id), FOREIGN KEY (tag_id) REFERENCES tags (id) ON DELETE RESTRICT)", []);
             this.isOpen = true;
             });

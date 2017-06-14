@@ -27,6 +27,10 @@
 <hr *ngIf="code">
 <ion-item>
   <b>Šifra:</b> {{code}}
-  <ion-icon name="md-wifi" item-right></ion-icon>
 </ion-item>
+<br><br>
+<button (click)="writeNFC()" ion-button color="light" icon-left *ngIf="code">
+  <ion-icon name="md-wifi"></ion-icon>
+  Zapiši na NFC oznaku
+</button>
 </ion-content>

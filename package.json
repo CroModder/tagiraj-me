@@ -1,6 +1,7 @@
 {
-  "name": "TagirajMe",
+  "name": "tagiraj-me",
   "author": "Paolo Božac",
+  "version": "1.0.1",
   "homepage": "http://tagiraj.me/",
   "private": true,
   "scripts": {

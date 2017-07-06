@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-buttons left>
+      <button ion-button (click)="dismiss()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      Uređivanje oznake
+    </ion-title>
+    <ion-buttons right>
+      <button ion-button (click)="deleteTagAlert()"><ion-icon name="trash"></ion-icon></button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+      <ion-label color="primary">Ime</ion-label>
+      <ion-input type="text" [(ngModel)]="name"></ion-input>
+  </ion-item>
+  <ion-grid>
+   <br>
+  <ion-row>
+    <ion-col width-50><button ion-button round outline block (click)="updateTag()">Potvrdi</button></ion-col>
+    <ion-col width-50><button ion-button round outline block (click)="dismiss()">Odustani</button></ion-col>
+  </ion-row>
+</ion-grid>
+</ion-content>

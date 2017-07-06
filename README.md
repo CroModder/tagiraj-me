@@ -1,26 +1,27 @@
-This is a starter template for [Ionic](http://ionicframework.com/docs/) projects.
+# Tagiraj Me
+[![Dependency Status](https://dependencyci.com/github/CroModder/tagiraj-me/badge)](https://dependencyci.com/github/CroModder/tagiraj-me)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-## How to use this template
+ Mobilna aplikacija za označavanje artikala
 
-*This template does not work on its own*. The shared files for each starter are found in the [ionic2-app-base repo](https://github.com/ionic-team/ionic2-app-base).
+## Korištene tehnologije:
+- Ionic Framework
+- Angular
+- TypeScript
+- HTML5
+- SASS
+- Cordova
 
-To use this template, either create a new ionic project using the ionic node.js utility, or copy the files from this repository into the [Starter App Base](https://github.com/ionic-team/ionic2-app-base).
+## Dodatne knjižnice koje se koriste:
+- cordova-sqlite-storage
+- phonegap-nfc
+- phonegap-plugin-barcodescanner
+- cordova-plugin-camera
 
-### With the Ionic CLI:
+## Baza podataka
+- [sqlite](https://www.sqlite.org/)
 
-Take the name after `ionic2-starter-`, and that is the name of the template to be used when using the `ionic start` command below:
 
-```bash
-$ sudo npm install -g ionic cordova
-$ ionic start myTabs tabs
-```
-
-Then, to run it, cd into `myTabs` and run:
-
-```bash
-$ ionic cordova platform add ios
-$ ionic cordova run ios
-```
-
-Substitute ios for android if not on a Mac.
-
+## Preuzimanje aplikacije
+- [Alpha v0.0.1](https://github.com/CroModder/tagiraj-me/raw/apk/tagirajMe-alpha-1.0.1.apk)
+- [Alpha v1](https://github.com/CroModder/tagiraj-me/raw/apk/tagirajMe-alpha.apk)

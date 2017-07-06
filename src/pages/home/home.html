@@ -1,17 +1,17 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Home</ion-title>
+  <ion-navbar color="primary">
+    <ion-title>Pretraživanje</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+  <h4>Odaberite način pretrage artikala:</h4>
+  <button ion-button icon-left block (click)="scan()"><ion-icon name="barcode"></ion-icon>Skeniranje bar koda</button>
+  <br>
+  <button ion-button icon-left block (click)="filterByTags()"><ion-icon name="pricetag"></ion-icon>Pretraga po oznakama</button>
+  <br>
+  <button ion-button icon-left block (click)="codeEntry()"><ion-icon name="code"></ion-icon>Manualni unos koda</button>
+  <br>
+  <button ion-button icon-left block (click)="keywordSearch()"><ion-icon name="paper"></ion-icon>Pretraga po ključnim riječima</button>
+  <br>
 </ion-content>

@@ -3,21 +3,43 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
-import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
-import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import { HomePage } from '../pages/home/home';
+import { TagsSearchModal } from '../pages/home/tags-search';
+import { KeywordsSearchModal } from '../pages/home/keywords-search';
+import { ArticlesPage } from '../pages/articles/articles';
+import { SingleArticle } from '../pages/articles/single-article';
+import { NewArticle } from '../pages/articles/new-article';
+import { EditArticle } from '../pages/articles/edit-article';
+import { TagsPage } from '../pages/tags/tags';
+import { NewTag } from '../pages/tags/new-tag';
+import { EditTag } from '../pages/tags/edit-tag';
+
+import { DatabaseService } from '../providers/database-service';
+import { NfcService } from '../providers/nfc-service';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { Camera } from '@ionic-native/camera';
+import { SQLite } from '@ionic-native/sqlite';
+import { NFC, Ndef } from '@ionic-native/nfc';
+
 
 @NgModule({
   declarations: [
     MyApp,
-    AboutPage,
-    ContactPage,
+    TabsPage,
     HomePage,
-    TabsPage
+    TagsSearchModal,
+    KeywordsSearchModal,
+    ArticlesPage,
+    SingleArticle,
+    EditArticle,
+    NewArticle,
+    TagsPage,
+    NewTag,
+    EditTag
   ],
   imports: [
     BrowserModule,
@@ -26,14 +48,28 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    AboutPage,
-    ContactPage,
+    TabsPage,
     HomePage,
-    TabsPage
+    TagsSearchModal,
+    KeywordsSearchModal,
+    ArticlesPage,
+    SingleArticle,
+    EditArticle,
+    NewArticle,
+    TagsPage,
+    NewTag,
+    EditTag
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    DatabaseService,
+    NfcService,
+    Camera,
+    BarcodeScanner,
+    SQLite,
+    NFC,
+    Ndef,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

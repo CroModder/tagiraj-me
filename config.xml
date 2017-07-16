@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="tagiraj.me" version="0.2.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Tagiraj Me</name>
-    <description>Mobilna aplikacija za organizaciju skladista</description>
+    <description>Mobilna aplikacija za oznacavanje artikala</description>
     <author email="cromodder@gmail.com" href="http://tagiraj.me">Paolo Bozac</author>
     <content src="index.html" />
     <access origin="*" />

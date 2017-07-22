@@ -13,6 +13,7 @@ import 'rxjs/add/operator/map';
 export class NfcService {
   private isOpen: boolean = false;
   public nfcListener: any;
+  private showMsg: boolean = true;
 
 public constructor( public platform: Platform, public alertCtrl: AlertController, public events: Events, private nfc: NFC, private ndef: Ndef) {
 }
@@ -26,7 +27,7 @@ public constructor( public platform: Platform, public alertCtrl: AlertController
               this.isOpen = true;
             })
             .catch(err => {
-              if(err == "NFC_DISABLED") {
+              if(err == "NFC_DISABLED" && this.showMsg) {
                 this.showSettingsAlert();
               }
             });
@@ -51,8 +52,13 @@ public constructor( public platform: Platform, public alertCtrl: AlertController
   }
 
   public removeNFCListener() {
-    this.nfcListener.unsubscribe();
-    this.isOpen = false;
+    try {
+      this.nfcListener.unsubscribe();
+      this.isOpen = false; 
+    } catch (error) {
+      console.log(error);
+      
+    }
   }
 
   public showSettingsAlert() {
@@ -60,10 +66,10 @@ public constructor( public platform: Platform, public alertCtrl: AlertController
     subTitle : "NFC nije uključen",
     buttons: [
       { 
-        text : "Postavke", handler : function() { this.nfc.showSettings() }
+        text : "Postavke", handler : () => { this.nfc.showSettings() }
       },
       {
-        text: 'Odustani'
+        text: 'Odustani', handler : () => { this.showMsg = false }
       }
     ]
     });

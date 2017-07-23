@@ -78,10 +78,14 @@ public constructor( public platform: Platform, public alertCtrl: AlertController
 
   public writeNFC(code) {
     let message = this.ndef.textRecord(code);
-    this.nfc.write([message]).then((result) => {
-      console.log(result);
-    }).catch((error) => {
-      console.log(error);
+    this.nfcListener = this.nfc.addNdefListener().subscribe(nfcData => {
+        this.nfc.write([message]).then((result) => {
+          console.log(result);
+          this.nfcListener.unsubscribe();
+        }).catch((error) => {
+          console.log(error);
+          this.nfcListener.unsubscribe();
+        });
     });
   }
   

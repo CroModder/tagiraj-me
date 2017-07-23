@@ -22,7 +22,7 @@ export class NewTag {
         this.database.createTag(this.name).then((result) => {
             this.dismiss();
         }, (error) => {
-            let msg = this.alertCtrl.create({title: error, buttons: [{text: 'Zatvori'}]});
+            let msg = this.alertCtrl.create({title: 'Oznaka već postoji!', buttons: [{text: 'Zatvori'}]});
             msg.present();
         });
     }

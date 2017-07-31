@@ -1,6 +1,8 @@
 import { NgModule, ErrorHandler } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+
 import { TabsPage } from '../pages/tabs/tabs';
 import { HomePage } from '../pages/home/home';
 import { TagsSearchModal } from '../pages/home/tags-search';
@@ -12,10 +14,17 @@ import { EditArticle } from '../pages/articles/edit-article';
 import { TagsPage } from '../pages/tags/tags';
 import { NewTag } from '../pages/tags/new-tag';
 import { EditTag } from '../pages/tags/edit-tag';
-import { SettingsPage } from '../pages/settings/settings';
-import { InfoPage } from '../pages/info/info';
+
 import { DatabaseService } from '../providers/database-service';
 import { NfcService } from '../providers/nfc-service';
+
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { Camera } from '@ionic-native/camera';
+import { SQLite } from '@ionic-native/sqlite';
+import { NFC, Ndef } from '@ionic-native/nfc';
+
 
 @NgModule({
   declarations: [
@@ -30,11 +39,10 @@ import { NfcService } from '../providers/nfc-service';
     NewArticle,
     TagsPage,
     NewTag,
-    EditTag,
-    SettingsPage,
-    InfoPage
+    EditTag
   ],
   imports: [
+    BrowserModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -50,10 +58,19 @@ import { NfcService } from '../providers/nfc-service';
     NewArticle,
     TagsPage,
     NewTag,
-    EditTag,
-    SettingsPage,
-    InfoPage
+    EditTag
   ],
-  providers: [DatabaseService, NfcService, {provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [
+    StatusBar,
+    SplashScreen,
+    DatabaseService,
+    NfcService,
+    Camera,
+    BarcodeScanner,
+    SQLite,
+    NFC,
+    Ndef,
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
+  ]
 })
 export class AppModule {}

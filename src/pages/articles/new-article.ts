@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavParams, ViewController, AlertController } from 'ionic-angular';
-import { Camera } from 'ionic-native';
+import { Camera } from '@ionic-native/camera';
 import { DatabaseService } from "../../providers/database-service";
 
 @Component({
@@ -16,7 +16,7 @@ export class NewArticle {
   public tags: any;
   public tagsSelected: Array<any> = [];
 
-  constructor(public viewCtrl: ViewController, private alertCtrl: AlertController, public params: NavParams, private database: DatabaseService ) {
+  constructor(public viewCtrl: ViewController, private alertCtrl: AlertController, public params: NavParams, private database: DatabaseService, private camera: Camera ) {
     this.name = "";
     this.thumbnail = "";
     this.description = "";
@@ -30,7 +30,7 @@ export class NewArticle {
 
   public takePicture() {
     let options = {saveToPhotoAlbum: true };
-    Camera.getPicture(options).then((imageData) => {
+    this.camera.getPicture(options).then((imageData) => {
       this.thumbnail = imageData;
       }, (err) => {
       console.log(err);
@@ -39,12 +39,12 @@ export class NewArticle {
 
   public selectFromGallery() {
     let options = {
-      sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-      destinationType: Camera.DestinationType.FILE_URI,    
-      encodingType: Camera.EncodingType.JPEG,      
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      destinationType: this.camera.DestinationType.FILE_URI,    
+      encodingType: this.camera.EncodingType.JPEG,      
       correctOrientation: true
     };
-    Camera.getPicture(options).then((imageData) => {
+    this.camera.getPicture(options).then((imageData) => {
         this.thumbnail = imageData;
     }, (err) => {
         console.log(err);

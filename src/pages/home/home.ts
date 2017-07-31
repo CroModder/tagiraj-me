@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ModalController, NavController, AlertController, Platform, Events } from 'ionic-angular';
-import { BarcodeScanner } from 'ionic-native';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { SingleArticle } from '../articles/single-article';
 import { NewArticle } from '../articles/new-article';
 import { TagsSearchModal } from '../home/tags-search';
@@ -23,9 +23,10 @@ export class HomePage {
     public modalCtrl: ModalController, 
     public alertCtrl: AlertController, 
     public navCtrl: NavController, 
-    private database: DatabaseService, 
+    private database: DatabaseService,
+    private barcodeScanner: BarcodeScanner,
     public nfc: NfcService,
-    public events: Events) {
+    public events: Events,) {
   }
 
   ionViewWillEnter(){
@@ -48,7 +49,7 @@ export class HomePage {
   }
 
   public scan() {
-    BarcodeScanner.scan().then((barcodeData) => {
+    this.barcodeScanner.scan().then((barcodeData) => {
     if(barcodeData.cancelled == false) {
       this.code = barcodeData.text;
       this.findArticle(barcodeData.text);

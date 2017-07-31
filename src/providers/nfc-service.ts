@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Platform, Events, AlertController } from 'ionic-angular';
-import { NFC, Ndef } from 'ionic-native';
+import { NFC, Ndef } from '@ionic-native/nfc';
 import 'rxjs/add/operator/map';
 
 /*
@@ -13,20 +13,21 @@ import 'rxjs/add/operator/map';
 export class NfcService {
   private isOpen: boolean = false;
   public nfcListener: any;
+  private showMsg: boolean = true;
 
-public constructor( public platform: Platform, public alertCtrl: AlertController, public events: Events) {
+public constructor( public platform: Platform, public alertCtrl: AlertController, public events: Events, private nfc: NFC, private ndef: Ndef) {
 }
 
   public init () {
         this.platform.ready().then(() => {
         if(!this.isOpen) {
-           NFC.enabled()
+           this.nfc.enabled()
             .then(() => {
               this.addListenNFC();
               this.isOpen = true;
             })
             .catch(err => {
-              if(err == "NFC_DISABLED") {
+              if(err == "NFC_DISABLED" && this.showMsg) {
                 this.showSettingsAlert();
               }
             });
@@ -35,13 +36,13 @@ public constructor( public platform: Platform, public alertCtrl: AlertController
   }
 
   public addListenNFC() {
-    this.nfcListener = NFC.addNdefListener().subscribe(nfcData => {
+    this.nfcListener = this.nfc.addNdefListener().subscribe(nfcData => {
       try {
         console.log(nfcData);
         
         let tag = nfcData.tag;
         let ndefMessage = tag.ndefMessage;
-        let parsedNfcData = NFC.bytesToString(ndefMessage[0].payload);
+        let parsedNfcData = this.nfc.bytesToString(ndefMessage[0].payload);
         let code = parsedNfcData.substring(3);
         this.events.publish('nfc:gotData', code);
       } catch (error) {
@@ -51,8 +52,13 @@ public constructor( public platform: Platform, public alertCtrl: AlertController
   }
 
   public removeNFCListener() {
-    this.nfcListener.unsubscribe();
-    this.isOpen = false;
+    try {
+      this.nfcListener.unsubscribe();
+      this.isOpen = false; 
+    } catch (error) {
+      console.log(error);
+      
+    }
   }
 
   public showSettingsAlert() {
@@ -60,10 +66,10 @@ public constructor( public platform: Platform, public alertCtrl: AlertController
     subTitle : "NFC nije uključen",
     buttons: [
       { 
-        text : "Postavke", handler : () => NFC.showSettings()
+        text : "Postavke", handler : () => { this.nfc.showSettings() }
       },
       {
-        text: 'Odustani'
+        text: 'Odustani', handler : () => { this.showMsg = false }
       }
     ]
     });
@@ -71,11 +77,15 @@ public constructor( public platform: Platform, public alertCtrl: AlertController
   }
 
   public writeNFC(code) {
-    let message = Ndef.textRecord(code);
-    NFC.write([message]).then((result) => {
-      console.log(result);
-    }).catch((error) => {
-      console.log(error);
+    let message = this.ndef.textRecord(code);
+    this.nfcListener = this.nfc.addNdefListener().subscribe(nfcData => {
+        this.nfc.write([message]).then((result) => {
+          console.log(result);
+          this.nfcListener.unsubscribe();
+        }).catch((error) => {
+          console.log(error);
+          this.nfcListener.unsubscribe();
+        });
     });
   }
   

@@ -4,22 +4,16 @@
 
  Mobilna aplikacija za označavanje artikala
 
-## Korištene tehnologije:
-- Ionic2 Framework
-- Angular2
+![Different platforms](https://raw.githubusercontent.com/CroModder/tagiraj-me/gh-pages/tagiraj_me_platforms.png)
+##  Tehnologije:
+- Ionic Framework
+- Angular
+- TypeScript
+- HTML5
 - SASS
 - Cordova
 
-## Dodatne knjižnice koje se koriste:
-- cordova-sqlite-storage
-- phonegap-nfc
-- phonegap-plugin-barcodescanner
-- cordova-plugin-camera
-
-## Baza podataka
-- [sqlite](https://www.sqlite.org/)
-
-
 ## Preuzimanje aplikacije
-- [Alpha v1.0.1](https://github.com/CroModder/tagiraj-me/raw/apk/tagirajMe-alpha-1.0.1.apk)
-- [Alpha v1](https://github.com/CroModder/tagiraj-me/raw/apk/tagirajMe-alpha.apk)
+### Android
+- [Beta v0.2.0](https://github.com/CroModder/tagiraj-me/raw/apk/tagirajMe-beta.apk)
+- [Alpha v0.1.1](https://github.com/CroModder/tagiraj-me/raw/apk/tagirajMe-alpha.apk)

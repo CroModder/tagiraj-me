@@ -1,6 +1,7 @@
 # Tagiraj Me
 [![Dependency Status](https://dependencyci.com/github/CroModder/tagiraj-me/badge)](https://dependencyci.com/github/CroModder/tagiraj-me)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Known Vulnerabilities](https://snyk.io/test/github/CroModder/tagiraj-me/badge.svg?targetFile=package.json)](https://snyk.io/test/github/CroModder/tagiraj-me?targetFile=package.json)
 
  Mobilna aplikacija za označavanje artikala
 

@@ -1,3 +1,6 @@
+> **Warning**
+> **[ DEPRECATED ]** - This project has been deprecated in favour of [Marker](https://github.com/CroModder/marker)
+
 # Tagiraj Me
 [![Dependency Status](https://dependencyci.com/github/CroModder/tagiraj-me/badge)](https://dependencyci.com/github/CroModder/tagiraj-me)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
